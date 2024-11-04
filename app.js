@@ -18,20 +18,47 @@ const firebaseConfig = {
   
   // DOM Elements
   const loginButton = document.getElementById('login-button');
+  const passwordPrompt = document.getElementById('password-prompt');
+  const adminPasswordInput = document.getElementById('admin-password');
+  const passwordSubmitButton = document.getElementById('password-submit');
+  const passwordError = document.getElementById('password-error');
+  const passwordErrorOkButton = document.getElementById('password-error-ok');
   const postForm = document.getElementById('post-form');
   const postButton = document.getElementById('post-button');
   const messageInput = document.getElementById('message-input');
   const visitorLoginButton = document.getElementById('visitor-login-button');
   const visitorUsernameInput = document.getElementById('visitor-username');
   const messagesContainer = document.getElementById('messages-container');
+  const reactionError = document.getElementById('reaction-error');
+  const reactionErrorClose = document.getElementById('reaction-error-close');
+  const reactionErrorOkButton = document.getElementById('reaction-error-ok');
   
   let visitorUsername = localStorage.getItem('visitorUsername') || '';
   
   // Admin Login
   loginButton.addEventListener('click', () => {
-    // Simulate admin login
+    // Show password prompt
     loginButton.style.display = 'none';
-    postForm.style.display = 'block';
+    passwordPrompt.style.display = 'block';
+  });
+  
+  // Handle Admin Password Submission
+  passwordSubmitButton.addEventListener('click', () => {
+    const enteredPassword = adminPasswordInput.value;
+    if (enteredPassword === 'knepskneps123') {
+      // Correct password, show post form
+      passwordPrompt.style.display = 'none';
+      postForm.style.display = 'block';
+    } else {
+      // Show custom error message
+      passwordError.style.display = 'block';
+    }
+  });
+  
+  // Handle Password Error OK Button
+  passwordErrorOkButton.addEventListener('click', () => {
+    passwordError.style.display = 'none';
+    adminPasswordInput.value = '';
   });
   
   // Publish a Message
@@ -71,26 +98,49 @@ const firebaseConfig = {
     messageElement.innerHTML = `
       <p>${messageData.text}</p>
       <button class="react-button" data-id="${messageKey}">React</button>
+      <!-- Reaction Form -->
+      <div class="reaction-form" id="reaction-form-${messageKey}" style="display: none;">
+        <textarea id="reaction-input-${messageKey}" rows="2" placeholder="Your reaction (max 25 words)"></textarea><br>
+        <button class="submit-reaction-button" data-id="${messageKey}">Submit</button>
+      </div>
       <div class="reactions" id="reactions-${messageKey}"></div>
     `;
     messagesContainer.prepend(messageElement);
   
     // Handle reactions
     const reactButton = messageElement.querySelector('.react-button');
+    const reactionForm = messageElement.querySelector(`#reaction-form-${messageKey}`);
+    const reactionInput = messageElement.querySelector(`#reaction-input-${messageKey}`);
+    const submitReactionButton = messageElement.querySelector('.submit-reaction-button');
+  
     reactButton.addEventListener('click', () => {
       if (!visitorUsername) {
-        alert("Please sign in to react.");
+        // Show custom error message
+        showReactionError("Please sign in to react.");
         return;
       }
-      const reactionText = prompt("Your reaction (max 25 words):");
+      // Toggle reaction form visibility
+      if (reactionForm.style.display === 'none') {
+        reactionForm.style.display = 'block';
+      } else {
+        reactionForm.style.display = 'none';
+      }
+    });
+  
+    // Handle submitting a reaction
+    submitReactionButton.addEventListener('click', () => {
+      const reactionText = reactionInput.value.trim();
       if (reactionText && reactionText.split(' ').length <= 25) {
         const reactionsRef = database.ref(`reactions/${messageKey}`);
         reactionsRef.push({
           username: visitorUsername,
           text: reactionText
         });
+        reactionInput.value = '';
+        reactionForm.style.display = 'none';
       } else {
-        alert("Your reaction exceeds the 25-word limit.");
+        // Show custom error message
+        showReactionError("Your reaction exceeds the 25-word limit.");
       }
     });
   
@@ -110,4 +160,20 @@ const firebaseConfig = {
   const messagesRef = database.ref('messages');
   messagesRef.on('child_added', (data) => {
     displayMessage(data);
+  });
+  
+  // Function to show reaction error
+  function showReactionError(message) {
+    reactionError.querySelector('.window-body p').textContent = message;
+    reactionError.style.display = 'block';
+  }
+  
+  // Handle Reaction Error Close Button
+  reactionErrorClose.addEventListener('click', () => {
+    reactionError.style.display = 'none';
+  });
+  
+  // Handle Reaction Error OK Button
+  reactionErrorOkButton.addEventListener('click', () => {
+    reactionError.style.display = 'none';
   });

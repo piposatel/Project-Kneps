@@ -23,7 +23,18 @@
       <!-- Admin Login Section -->
       <div id="admin-section">
         <button id="login-button">Login as Administrator</button>
-        <!-- Post Form (visible only to admin) -->
+        <!-- Password Prompt (hidden by default) -->
+        <div id="password-prompt" style="display: none;">
+          <h2>Administrator Login</h2>
+          <input type="password" id="admin-password" placeholder="Enter password">
+          <button id="password-submit">Submit</button>
+          <!-- Error message for incorrect password -->
+          <div id="password-error" class="error-message" style="display: none;">
+            Incorrect password. Please try again.
+            <button id="password-error-ok">OK</button>
+          </div>
+        </div>
+        <!-- Post Form (hidden by default) -->
         <div id="post-form" style="display: none;">
           <h2>New Post</h2>
           <textarea id="message-input" rows="4" cols="50" placeholder="Your message"></textarea><br>
@@ -41,6 +52,22 @@
       <!-- Messages Section -->
       <div id="messages-container">
         <!-- Messages will be displayed here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Reaction Error Message -->
+  <div id="reaction-error" class="error-message" style="display: none;">
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">Error</div>
+        <div class="title-bar-controls">
+          <button id="reaction-error-close" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <p>Your reaction exceeds the 25-word limit.</p>
+        <button id="reaction-error-ok">OK</button>
       </div>
     </div>
   </div>

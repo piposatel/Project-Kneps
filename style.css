@@ -2,10 +2,17 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #C0C0C0; /* Windows 95 gray background */
+    background-color: #008080; /* Old Microsoft green */
     font-family: 'MS Sans Serif', Arial, sans-serif;
     font-size: 13px;
     color: black;
+  }
+  
+  /* Prevent text selection highlighting */
+  body, button, input, textarea {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   
   /* Window */
@@ -69,7 +76,7 @@ body {
   }
   
   /* Inputs and Textareas */
-  input[type="text"], textarea {
+  input[type="text"], input[type="password"], textarea {
     width: calc(100% - 10px);
     padding: 2px;
     background-color: #FFF;
@@ -77,6 +84,12 @@ body {
     box-shadow: inset -1px -1px 0px #000, inset 1px 1px 0px #808080;
     font-family: inherit;
     font-size: 13px;
+    resize: none; /* Prevent resizing */
+    overflow-wrap: break-word; /* Handle long words */
+  }
+  
+  textarea {
+    resize: none; /* Prevent resizing */
   }
   
   /* Messages */
@@ -89,23 +102,43 @@ body {
     border: 2px solid #808080;
     padding: 10px;
     margin-bottom: 10px;
+    box-sizing: border-box;
     box-shadow: inset -1px -1px 0px #FFF, inset 1px 1px 0px #000;
+    word-wrap: break-word; /* Handle long words */
+    overflow-wrap: break-word; /* Handle long words */
   }
   
   .message p {
     margin: 0 0 10px 0;
   }
   
-  .react-button {
-    margin-top: 5px;
+  /* Reaction Form */
+  .reaction-form {
+    margin-top: 10px;
+  }
+  
+  .reaction-form textarea {
+    width: calc(100% - 10px);
+    height: 50px;
+    margin-bottom: 5px;
+  }
+  
+  .reaction-form button {
+    display: inline-block;
   }
   
   /* Reactions */
+  .reactions {
+    margin-top: 10px;
+  }
+  
   .reaction {
     margin-left: 20px;
     font-size: 12px;
     color: #000080;
     margin-top: 5px;
+    word-wrap: break-word; /* Handle long words */
+    overflow-wrap: break-word; /* Handle long words */
   }
   
   .reaction strong {
@@ -121,4 +154,21 @@ body {
   /* Visitor Login */
   #visitor-login {
     margin-top: 20px;
+  }
+  
+  /* Error Messages */
+  .error-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #C0C0C0;
+    border: 2px solid #000;
+    padding: 10px;
+    box-shadow: inset -1px -1px 0px #FFF, inset 1px 1px 0px #000;
+    z-index: 1000;
+  }
+  
+  .error-message p {
+    margin: 0;
   }
