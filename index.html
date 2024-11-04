@@ -1,43 +1,51 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Project Kneps</title>
-  <!-- Inclure 98.css pour le style Windows 98 -->
-  <link rel="stylesheet" href="https://unpkg.com/98.css@0.1.0/dist/98.css">
+  <!-- Link to your CSS file -->
   <link rel="stylesheet" href="style.css">
+  <!-- Include Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
 </head>
 <body>
-  <div class="window" style="width: 500px; margin: auto; margin-top: 50px;">
+  <div class="window">
     <div class="title-bar">
-      <div class="title-bar-text">KnepsLaMenace</div>
+      <div class="title-bar-text">Kneps The Menace</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
     </div>
     <div class="window-body">
-      <!-- Bouton de connexion administrateur -->
-      <button id="login-button">Se connecter en tant qu'administrateur</button>
-
-      <!-- Formulaire pour poster un message (visible uniquement pour l'administrateur) -->
-      <div id="post-form" style="display: none;">
-        <textarea id="message-input" rows="4" cols="50" placeholder="Votre message"></textarea><br>
-        <button id="post-button">Publier</button>
+      <!-- Admin Login Section -->
+      <div id="admin-section">
+        <button id="login-button">Login as Administrator</button>
+        <!-- Post Form (visible only to admin) -->
+        <div id="post-form" style="display: none;">
+          <h2>New Post</h2>
+          <textarea id="message-input" rows="4" cols="50" placeholder="Your message"></textarea><br>
+          <button id="post-button">Publish</button>
+        </div>
       </div>
 
-      <!-- Identification du visiteur -->
+      <!-- Visitor Login Section -->
       <div id="visitor-login">
-        <input type="text" id="visitor-username" placeholder="Entrez votre nom d'utilisateur">
-        <button id="visitor-login-button">S'identifier</button>
+        <h2>Sign In</h2>
+        <input type="text" id="visitor-username" placeholder="Enter your username">
+        <button id="visitor-login-button">Sign In</button>
       </div>
 
-      <!-- Conteneur des messages -->
-      <div id="messages-container"></div>
+      <!-- Messages Section -->
+      <div id="messages-container">
+        <!-- Messages will be displayed here -->
+      </div>
     </div>
   </div>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
-
-  <!-- Votre fichier JavaScript -->
+  <!-- Your JavaScript file -->
   <script src="app.js"></script>
 </body>
 </html>

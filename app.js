@@ -1,4 +1,4 @@
-// Configuration Firebase
+// Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCwHS-7ld1gCVZGxAdYq9BN2siv3armZ4E",
     authDomain: "project-kneps.firebaseapp.com",
@@ -10,13 +10,13 @@ const firebaseConfig = {
     measurementId: "G-7NYX9KTM38"
   };
   
-  // Initialiser Firebase
+  // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   
-  // Référence à la base de données
+  // Reference to the database
   const database = firebase.database();
   
-  // Éléments du DOM
+  // DOM Elements
   const loginButton = document.getElementById('login-button');
   const postForm = document.getElementById('post-form');
   const postButton = document.getElementById('post-button');
@@ -27,18 +27,18 @@ const firebaseConfig = {
   
   let visitorUsername = localStorage.getItem('visitorUsername') || '';
   
-  // Gestion de la connexion administrateur
+  // Admin Login
   loginButton.addEventListener('click', () => {
-    // Simuler une connexion administrateur
+    // Simulate admin login
     loginButton.style.display = 'none';
     postForm.style.display = 'block';
   });
   
-  // Publier un message
+  // Publish a Message
   postButton.addEventListener('click', () => {
     const message = messageInput.value;
     if (message.trim() !== '') {
-      // Envoyer le message à Firebase
+      // Send message to Firebase
       const messagesRef = database.ref('messages');
       const newMessageRef = messagesRef.push();
       newMessageRef.set({
@@ -49,7 +49,7 @@ const firebaseConfig = {
     }
   });
   
-  // Gestion de l'identification du visiteur
+  // Visitor Login
   if (visitorUsername) {
     document.getElementById('visitor-login').style.display = 'none';
   }
@@ -62,7 +62,7 @@ const firebaseConfig = {
     }
   });
   
-  // Fonction pour afficher un message
+  // Function to display a message
   function displayMessage(data) {
     const messageData = data.val();
     const messageKey = data.key;
@@ -70,19 +70,19 @@ const firebaseConfig = {
     messageElement.classList.add('message');
     messageElement.innerHTML = `
       <p>${messageData.text}</p>
-      <button class="react-button" data-id="${messageKey}">Réagir</button>
+      <button class="react-button" data-id="${messageKey}">React</button>
       <div class="reactions" id="reactions-${messageKey}"></div>
     `;
     messagesContainer.prepend(messageElement);
   
-    // Gérer les réactions
+    // Handle reactions
     const reactButton = messageElement.querySelector('.react-button');
     reactButton.addEventListener('click', () => {
       if (!visitorUsername) {
-        alert("Veuillez vous identifier pour réagir.");
+        alert("Please sign in to react.");
         return;
       }
-      const reactionText = prompt("Votre réaction (25 mots max) :");
+      const reactionText = prompt("Your reaction (max 25 words):");
       if (reactionText && reactionText.split(' ').length <= 25) {
         const reactionsRef = database.ref(`reactions/${messageKey}`);
         reactionsRef.push({
@@ -90,23 +90,23 @@ const firebaseConfig = {
           text: reactionText
         });
       } else {
-        alert("Votre réaction dépasse la limite de 25 mots.");
+        alert("Your reaction exceeds the 25-word limit.");
       }
     });
   
-    // Écouter les réactions pour ce message
+    // Listen for reactions to this message
     const reactionsRef = database.ref(`reactions/${messageKey}`);
     const reactionsContainer = messageElement.querySelector(`#reactions-${messageKey}`);
     reactionsRef.on('child_added', (reactionData) => {
       const reaction = reactionData.val();
       const reactionElement = document.createElement('div');
       reactionElement.classList.add('reaction');
-      reactionElement.innerHTML = `<strong>${reaction.username} :</strong> ${reaction.text}`;
+      reactionElement.innerHTML = `<strong>${reaction.username}:</strong> ${reaction.text}`;
       reactionsContainer.appendChild(reactionElement);
     });
   }
   
-  // Écouter les nouveaux messages ajoutés à Firebase
+  // Listen for new messages added to Firebase
   const messagesRef = database.ref('messages');
   messagesRef.on('child_added', (data) => {
     displayMessage(data);
