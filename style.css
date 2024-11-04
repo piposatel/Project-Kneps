@@ -1,0 +1,13 @@
+/* Style pour les messages */
+.message {
+    border: 1px solid gray;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* Style pour les réactions */
+  .reaction {
+    margin-left: 20px;
+    font-size: 0.9em;
+    color: blue;
+  }

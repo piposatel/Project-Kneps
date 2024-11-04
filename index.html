@@ -1,14 +1,43 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kneps La Menace</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Project Kneps</title>
+  <!-- Inclure 98.css pour le style Windows 98 -->
+  <link rel="stylesheet" href="https://unpkg.com/98.css@0.1.0/dist/98.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Bienvenue sur le blog de Kneps La Menace</h1>
-    <p>Ceci est un blog où je raconte la vie de mon chat Kneps.</p>
-    <p>test</p>
+  <div class="window" style="width: 500px; margin: auto; margin-top: 50px;">
+    <div class="title-bar">
+      <div class="title-bar-text">KnepsLaMenace</div>
+    </div>
+    <div class="window-body">
+      <!-- Bouton de connexion administrateur -->
+      <button id="login-button">Se connecter en tant qu'administrateur</button>
+
+      <!-- Formulaire pour poster un message (visible uniquement pour l'administrateur) -->
+      <div id="post-form" style="display: none;">
+        <textarea id="message-input" rows="4" cols="50" placeholder="Votre message"></textarea><br>
+        <button id="post-button">Publier</button>
+      </div>
+
+      <!-- Identification du visiteur -->
+      <div id="visitor-login">
+        <input type="text" id="visitor-username" placeholder="Entrez votre nom d'utilisateur">
+        <button id="visitor-login-button">S'identifier</button>
+      </div>
+
+      <!-- Conteneur des messages -->
+      <div id="messages-container"></div>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+
+  <!-- Votre fichier JavaScript -->
+  <script src="app.js"></script>
 </body>
 </html>
