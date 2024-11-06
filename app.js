@@ -414,3 +414,23 @@ const firebaseConfig = {
     pendingDelete = null;
     confirmationDialog.style.display = 'none';
   });
+  // Handle Desktop Icon Clicks
+document.addEventListener('DOMContentLoaded', function() {
+    const icons = document.querySelectorAll('.desktop .icon');
+    icons.forEach(icon => {
+      icon.addEventListener('dblclick', function() {
+        const app = this.getAttribute('data-app');
+        if (app === 'photo-knefe') {
+          const windowElement = document.getElementById('photo-knefe-window');
+          windowElement.style.display = 'block';
+        }
+      });
+    });
+  
+    // Close button for Photo Knefe window
+    const photoKnefeWindow = document.getElementById('photo-knefe-window');
+    const closeButton = photoKnefeWindow.querySelector('.close-button');
+    closeButton.addEventListener('click', function() {
+      photoKnefeWindow.style.display = 'none';
+    });
+  });

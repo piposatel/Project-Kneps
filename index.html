@@ -10,60 +10,129 @@
   <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
 </head>
 <body>
-  <div class="window">
-    <div class="title-bar">
-      <div class="title-bar-text" id="title-bar-text">Kneps The Menace</div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimize"></button>
-        <button aria-label="Maximize"></button>
-        <button aria-label="Close"></button>
+  <!-- Desktop background -->
+  <div class="desktop">
+    <!-- Desktop icons -->
+    <div class="desktop-icons">
+      <div class="icon" data-app="my-computer">
+        <img src="images/my_computer.png" alt="My Computer Icon">
+        <span>My Computer</span>
+      </div>
+      <div class="icon" data-app="recycle-bin">
+        <img src="images/recycle_bin.png" alt="Recycle Bin Icon">
+        <span>Recycle Bin</span>
+      </div>
+      <div class="icon" data-app="photo-knefe">
+        <img src="images/photo_knefe.png" alt="Photo Knefe Icon">
+        <span>Photo Knefe</span>
+      </div>
+      <!-- Additional apps -->
+      <div class="icon" data-app="internet-explorer">
+        <img src="images/internet_explorer.png" alt="Internet Explorer Icon">
+        <span>Internet Explorer</span>
+      </div>
+      <div class="icon" data-app="notepad">
+        <img src="images/pingpong.webp" alt="Notepad Icon">
+        <span>Notepad</span>
+      </div>
+      <div class="icon" data-app="paint">
+        <img src="images/paint.png" alt="Paint Icon">
+        <span>Paint</span>
       </div>
     </div>
-    <div class="window-body">
-      <!-- Login Selection -->
-      <div id="login-selection">
-        <h2>Select User Type</h2>
-        <button id="login-admin-button">Administrator</button>
-        <button id="login-guest-button">Guest</button>
-      </div>
 
-      <!-- Admin Login Section -->
-      <div id="admin-login" style="display: none;">
-        <h2>Administrator Login</h2>
-        <input type="password" id="admin-password" placeholder="Enter password">
-        <button id="admin-login-submit">Login</button>
-        <button id="admin-login-back">Back</button>
-        <!-- Error message for incorrect password -->
-        <div id="password-error" class="error-message" style="display: none;">
-          Incorrect password. Please try again.
-          <button id="password-error-ok">OK</button>
+    <!-- Main window -->
+    <div class="window main-window">
+      <!-- Title Bar -->
+      <div class="title-bar">
+        <div class="title-bar-text" id="title-bar-text">Kneps The Menace</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
         </div>
       </div>
+      <!-- Window Body -->
+      <div class="window-body">
+        <!-- Login Selection -->
+        <div id="login-selection">
+          <h2>Select User Type</h2>
+          <button id="login-admin-button">Administrator</button>
+          <button id="login-guest-button">Guest</button>
+        </div>
 
-      <!-- Admin Panel -->
-      <div id="admin-panel" style="display: none;">
-        <h2>New Post</h2>
-        <textarea id="message-input" rows="4" cols="50" placeholder="Your message"></textarea><br>
-        <button id="post-button">Publish</button>
-        <button id="admin-logout-button">Logout</button>
+        <!-- Admin Login Section -->
+        <div id="admin-login" style="display: none;">
+          <h2>Administrator Login</h2>
+          <input type="password" id="admin-password" placeholder="Enter password">
+          <button id="admin-login-submit">Login</button>
+          <button id="admin-login-back">Back</button>
+          <!-- Error message for incorrect password -->
+          <div id="password-error" class="error-message" style="display: none;">
+            Incorrect password. Please try again.
+            <button id="password-error-ok">OK</button>
+          </div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="admin-panel" style="display: none;">
+          <h2>New Post</h2>
+          <textarea id="message-input" rows="4" cols="50" placeholder="Your message"></textarea><br>
+          <button id="post-button">Publish</button>
+          <button id="admin-logout-button">Logout</button>
+        </div>
+
+        <!-- Guest Login Section -->
+        <div id="guest-login" style="display: none;">
+          <h2>Guest Login</h2>
+          <input type="text" id="guest-username" placeholder="Enter your username">
+          <button id="guest-login-submit">Login</button>
+          <button id="guest-login-back">Back</button>
+        </div>
+
+        <!-- Guest Panel -->
+        <div id="guest-panel" style="display: none;">
+          <button id="guest-logout-button">Logout</button>
+        </div>
+
+        <!-- Messages Section -->
+        <div id="messages-container">
+          <!-- Messages will be displayed here -->
+        </div>
       </div>
+    </div>
 
-      <!-- Guest Login Section -->
-      <div id="guest-login" style="display: none;">
-        <h2>Guest Login</h2>
-        <input type="text" id="guest-username" placeholder="Enter your username">
-        <button id="guest-login-submit">Login</button>
-        <button id="guest-login-back">Back</button>
+    <!-- Photo Knefe Window -->
+    <div class="window" id="photo-knefe-window" style="display: none;">
+      <div class="title-bar">
+        <div class="title-bar-text">Photo Knefe</div>
+        <div class="title-bar-controls">
+          <button class="close-button" aria-label="Close"></button>
+        </div>
       </div>
-
-      <!-- Guest Panel -->
-      <div id="guest-panel" style="display: none;">
-        <button id="guest-logout-button">Logout</button>
+      <div class="window-body">
+        <!-- Placeholder for photos -->
+        <p>Photo gallery will be here.</p>
+        <!-- You can add images here later -->
       </div>
+    </div>
 
-      <!-- Messages Section -->
-      <div id="messages-container">
-        <!-- Messages will be displayed here -->
+    <!-- Taskbar -->
+    <div class="taskbar">
+      <div class="start-button">
+        <img src="images/start_button.png" alt="Start Button">
+      </div>
+      <div class="taskbar-items">
+        <div class="taskbar-item" data-app="about-kneps">
+          <img src="images/window_icon.png" alt="About Kneps">
+        </div>
+        <div class="taskbar-item" data-app="latest-misadventures">
+          <img src="images/window_icon.png" alt="Latest Misadventures">
+        </div>
+      </div>
+      <div class="taskbar-clock">
+        <!-- We'll use JavaScript to update the time -->
+        <span id="clock">12:00 PM</span>
       </div>
     </div>
   </div>
@@ -103,5 +172,45 @@
 
   <!-- Your JavaScript file -->
   <script src="app.js"></script>
+  <!-- Clock Update Script -->
+  <script>
+    function updateClock() {
+      const clockElement = document.getElementById('clock');
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = now.getMinutes();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      const minutesStr = minutes < 10 ? '0'+minutes : minutes;
+      const timeString = hours + ':' + minutesStr + ' ' + ampm;
+      clockElement.textContent = timeString;
+    }
+    setInterval(updateClock, 1000);
+    updateClock(); // initial call
+  </script>
+
+  <!-- Desktop Icon Click Handling Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const icons = document.querySelectorAll('.desktop .icon');
+      icons.forEach(icon => {
+        icon.addEventListener('dblclick', function() {
+          const app = this.getAttribute('data-app');
+          if (app === 'photo-knefe') {
+            const windowElement = document.getElementById('photo-knefe-window');
+            windowElement.style.display = 'block';
+          }
+        });
+      });
+
+      // Close button for Photo Knefe window
+      const photoKnefeWindow = document.getElementById('photo-knefe-window');
+      const closeButton = photoKnefeWindow.querySelector('.close-button');
+      closeButton.addEventListener('click', function() {
+        photoKnefeWindow.style.display = 'none';
+      });
+    });
+  </script>
 </body>
 </html>
