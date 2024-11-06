@@ -2,7 +2,7 @@
 const firebaseConfig = {
     apiKey: "AIzaSyCwHS-7ld1gCVZGxAdYq9BN2siv3armZ4E",
     authDomain: "project-kneps.firebaseapp.com",
-    databaseURL: "https://project-kneps-default-rtdb.firebaseio.com",
+    databaseURL: "https://project-kneps-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "project-kneps",
     storageBucket: "project-kneps.appspot.com",
     messagingSenderId: "855207133317",
