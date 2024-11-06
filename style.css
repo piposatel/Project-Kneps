@@ -112,6 +112,11 @@ body {
     margin: 0 0 10px 0;
   }
   
+  /* Edit and Delete Buttons */
+  .edit-button, .delete-button, .delete-reaction-button {
+    margin-left: 5px;
+  }
+  
   /* Reaction Form */
   .reaction-form {
     margin-top: 10px;
@@ -151,11 +156,6 @@ body {
     margin: 10px 0;
   }
   
-  /* Visitor Login */
-  #visitor-login {
-    margin-top: 20px;
-  }
-  
   /* Error Messages */
   .error-message {
     position: fixed;
@@ -171,4 +171,19 @@ body {
   
   .error-message p {
     margin: 0;
+  }
+  
+  /* Inline Edit Form */
+  .edit-form {
+    margin-top: 10px;
+  }
+  
+  .edit-form textarea {
+    width: calc(100% - 10px);
+    height: 50px;
+    margin-bottom: 5px;
+  }
+  
+  .edit-form button {
+    display: inline-block;
   }
